@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IonicLib.Extensions
 {
-    public static partial class Helper
+    public static class Helper
     {
 		static readonly Random random = new Random();
 
