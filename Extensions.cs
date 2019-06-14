@@ -2,17 +2,15 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Net;
 using System.Security.Cryptography;
-using System.Threading.Tasks;
 
 namespace IonicLib.Extensions
 {
 	public static class Extensions
 	{
-		public static T Random<T>(this IEnumerable<T> collection)
+		public static T Random<T>(this ICollection<T> collection)
 		{
-			return collection.ToArray()[Helper.XorShift() % collection.Count()];
+			return collection.ToArray()[Helper.NextInt(0, collection.Count)];
 		}
 
 		public static bool IsWeekEnd(this DateTime dt) =>
@@ -29,7 +27,7 @@ namespace IonicLib.Extensions
 			return sw.Elapsed;
 		}
 
-		public static IEnumerable<T> ForEach<T>(this IEnumerable<T> elements, Action<T> action)
+		public static ICollection<T> ForEach<T>(this ICollection<T> elements, Action<T> action)
 		{
 			foreach (var element in elements)
 			{
@@ -39,7 +37,7 @@ namespace IonicLib.Extensions
 			return elements;
 		}
 
-		public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> collection)
+		public static ICollection<T> Shuffle<T>(this ICollection<T> collection)
 		{
 			using (var provider = RandomNumberGenerator.Create())
 			{
